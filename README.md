@@ -2,6 +2,8 @@
 
 A modern, AI-powered supply chain management dashboard built with React, Tailwind CSS, and Framer Motion. This dashboard helps businesses optimize their supply chain operations with real-time analytics, inventory management, and distribution planning.
 
+![Dashboard Preview](public/dashboard-preview.png)
+
 ## Features
 
 - 📊 **Real-time Analytics**: Track sales, inventory, and delivery metrics

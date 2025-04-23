@@ -11,6 +11,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
 } from 'recharts';
+import DemandPrediction from '../components/DemandPrediction';
 
 const SectionHeader = ({ title, icon, isOpen, toggleOpen }) => (
   <div 
@@ -331,6 +332,9 @@ const Dashboard = () => {
           </p>
         </motion.div>
 
+        {/* Demand Prediction Section */}
+        <DemandPrediction />
+
         {/* Progress Steps */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
@@ -349,16 +353,16 @@ const Dashboard = () => {
                     {step.icon}
                   </div>
                   <span className="font-medium">{step.title}</span>
-          </div>
-        ))}
+                </div>
+              ))}
             </div>
-        <button
+            <button
               onClick={() => setShowHelp(!showHelp)}
               className="text-gray-600 hover:text-gray-800 shrink-0 ml-4"
-        >
+            >
               <FiHelpCircle className="text-xl" />
-        </button>
-      </div>
+            </button>
+          </div>
           <div className="h-1 bg-gray-200 rounded-full">
             <motion.div
               className="h-full bg-green-600 rounded-full"
@@ -550,7 +554,7 @@ const Dashboard = () => {
               <FiStar className="text-yellow-500" />
               Performance Metrics
             </h3>
-                  <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="p-3 bg-green-50 rounded-lg">
                 <div className="text-2xl font-bold text-green-600">{performanceMetrics.deliverySuccessRate}%</div>
                 <div className="text-sm text-gray-600">Delivery Success</div>
@@ -698,6 +702,16 @@ const Dashboard = () => {
           transition={{ delay: 0.2 }}
           className="bg-white rounded-2xl shadow-xl p-8 mb-12"
         >
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-800 mb-2 flex items-center gap-3">
+              <FiTruck className="text-green-600" />
+              Supply Chain Plan Generator
+            </h2>
+            <p className="text-gray-600">
+              Generate a comprehensive supply chain plan including delivery routes, cost analysis, and risk assessment
+            </p>
+          </div>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStep}
@@ -708,54 +722,59 @@ const Dashboard = () => {
             >
               {/* Step 1: Location and Date */}            
               {activeStep === 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-lg font-semibold text-gray-800 mb-2">
-                      <FiMapPin className="inline mr-2" />
-                      Location
-                    </label>
-                    <input
-                      type="text"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                      placeholder="Enter village/town name"
-                    />
-                    <p className="text-sm text-gray-500 mt-2">Enter the exact delivery location name (e.g., 'Village Name, District, State')</p>
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <span className="text-green-600 font-semibold">1</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">Location & Delivery Details</h3>
                   </div>
-                  <div>
-                    <label className="block text-lg font-semibold text-gray-800 mb-2">
-                      <FiCalendar className="inline mr-2" />
-                      Delivery Date
-                    </label>
-                    <input
-                      type="date"
-                      value={deliveryDate}
-                      onChange={(e) => setDeliveryDate(e.target.value)}
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                      min={new Date().toISOString().split('T')[0]}
-                    />
-                    <p className="text-sm text-gray-500 mt-2">Select a future date for delivery (at least 2 days from today)</p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-gray-700">
+                        <FiMapPin className="inline mr-2 text-green-500" />
+                        Delivery Location
+                        <span className="text-red-500 ml-1">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        placeholder="Enter village/town name"
+                      />
+                      <p className="text-xs text-gray-500">Enter the exact delivery location name (e.g., 'Village Name, District, State')</p>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-gray-700">
+                        <FiCalendar className="inline mr-2 text-green-500" />
+                        Delivery Date
+                        <span className="text-red-500 ml-1">*</span>
+                      </label>
+                      <input
+                        type="date"
+                        value={deliveryDate}
+                        onChange={(e) => setDeliveryDate(e.target.value)}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                        min={new Date().toISOString().split('T')[0]}
+                      />
+                      <p className="text-xs text-gray-500">Select a future date for delivery (at least 2 days from today)</p>
+                    </div>
                   </div>
                 </div>
               )}
               
               {/* Step 2: Products */}            
               {activeStep === 2 && (
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <label className="block text-lg font-semibold text-gray-800">
-                      <FiPackage className="inline mr-2" />
-                      Products
-                    </label>
-                    <button
-                      onClick={handleAddProduct}
-                      className="text-green-600 hover:text-green-700 flex items-center gap-1 text-sm font-medium"
-                    >
-                      <FiPlus className="text-lg" />
-                      <span>Add Product</span>
-                    </button>
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <span className="text-green-600 font-semibold">2</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">Product Details</h3>
                   </div>
+
                   <div className="space-y-4">
                     {products.map((product, index) => (
                       <motion.div
@@ -767,8 +786,8 @@ const Dashboard = () => {
                         transition={{ duration: 0.2 }}
                         className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-gray-50 rounded-xl items-end"
                       >
-                        <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Product Name</label>
+                        <div className="space-y-2">
+                          <label className="block text-xs font-medium text-gray-600">Product Name</label>
                           <input
                             type="text"
                             value={product.name}
@@ -777,8 +796,8 @@ const Dashboard = () => {
                             placeholder="e.g., Tomatoes, Potatoes, Milk"
                           />
                         </div>
-                        <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Quantity</label>
+                        <div className="space-y-2">
+                          <label className="block text-xs font-medium text-gray-600">Quantity</label>
                           <input
                             type="number"
                             value={product.quantity}
@@ -788,8 +807,8 @@ const Dashboard = () => {
                             min="1"
                           />
                         </div>
-                        <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Unit</label>
+                        <div className="space-y-2">
+                          <label className="block text-xs font-medium text-gray-600">Unit</label>
                           <select
                             value={product.unit}
                             onChange={(e) => handleProductChange(index, 'unit', e.target.value)}
@@ -803,8 +822,8 @@ const Dashboard = () => {
                           </select>
                         </div>
                         <div className="flex items-end gap-2">
-                          <div className="flex-1">
-                            <label className="block text-xs font-medium text-gray-600 mb-1">Priority</label>
+                          <div className="flex-1 space-y-2">
+                            <label className="block text-xs font-medium text-gray-600">Priority</label>
                             <select
                               value={product.priority}
                               onChange={(e) => handleProductChange(index, 'priority', e.target.value)}
@@ -827,44 +846,69 @@ const Dashboard = () => {
                       </motion.div>
                     ))}
                   </div>
-                  <p className="text-sm text-gray-500 mt-3">Add all required products with quantities and units. For example: Tomatoes (50 kg), Milk (20 liters), Potatoes (100 kg)</p>
+
+                  <button
+                    onClick={handleAddProduct}
+                    className="mt-4 px-4 py-2 bg-green-50 text-green-600 rounded-lg font-medium flex items-center gap-2 hover:bg-green-100 transition"
+                  >
+                    <FiPlus className="text-lg" />
+                    Add Another Product
+                  </button>
                 </div>
               )}
               
               {/* Step 3: Special Requirements */}            
               {activeStep === 3 && (
-                <div>
-                  <label className="block text-lg font-semibold text-gray-800 mb-2">
-                    <FiInfo className="inline mr-2" />
-                    Special Requirements
-                  </label>
-                  <textarea
-                    value={specialRequirements}
-                    onChange={(e) => setSpecialRequirements(e.target.value)}
-                    className="w-full h-32 p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
-                    placeholder="e.g., Needs cold storage, Fragile items, Specific delivery window..."
-                  />
-                  <p className="text-sm text-gray-500 mt-2">Specify any special handling, storage, or delivery needs. For example: 'Need cold storage for dairy products', 'Fragile items - handle with care', 'Delivery preferred between 9 AM to 5 PM'</p>
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <span className="text-green-600 font-semibold">3</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">Special Requirements</h3>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      <FiInfo className="inline mr-2 text-green-500" />
+                      Additional Requirements
+                    </label>
+                    <textarea
+                      value={specialRequirements}
+                      onChange={(e) => setSpecialRequirements(e.target.value)}
+                      className="w-full h-32 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                      placeholder="e.g., Needs cold storage, Fragile items, Specific delivery window..."
+                    />
+                    <p className="text-xs text-gray-500">Specify any special handling, storage, or delivery needs. For example: 'Need cold storage for dairy products', 'Fragile items - handle with care', 'Delivery preferred between 9 AM to 5 PM'</p>
+                  </div>
                 </div>
               )}
               
               {/* Step 4: Urgency */}            
               {activeStep === 4 && (
-                <div>
-                  <label className="block text-lg font-semibold text-gray-800 mb-2">
-                    <FiClock className="inline mr-2" />
-                    Urgency Level
-                  </label>
-                  <select
-                    value={urgency}
-                    onChange={(e) => setUrgency(e.target.value)}
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition bg-white"
-                  >
-                    <option value="low">Low (Standard delivery: 5-7 days)</option>
-                    <option value="medium">Medium (Priority delivery: 3-4 days)</option>
-                    <option value="high">High (Express delivery: 1-2 days)</option>
-                  </select>
-                  <p className="text-sm text-gray-500 mt-2">Choose how quickly the delivery is needed. High urgency may incur additional charges.</p>
+                <div className="space-y-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <span className="text-green-600 font-semibold">4</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800">Delivery Urgency</h3>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-medium text-gray-700">
+                      <FiClock className="inline mr-2 text-green-500" />
+                      Urgency Level
+                    </label>
+                    <select
+                      value={urgency}
+                      onChange={(e) => setUrgency(e.target.value)}
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition bg-white"
+                    >
+                      <option value="low">Low (Standard delivery: 5-7 days)</option>
+                      <option value="medium">Medium (Priority delivery: 3-4 days)</option>
+                      <option value="high">High (Express delivery: 1-2 days)</option>
+                    </select>
+                    <p className="text-xs text-gray-500">Choose how quickly the delivery is needed. High urgency may incur additional charges.</p>
+                  </div>
                 </div>
               )}
             </motion.div>
