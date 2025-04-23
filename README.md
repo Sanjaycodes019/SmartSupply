@@ -13,6 +13,7 @@ A modern, AI-powered supply chain management dashboard built with React, Tailwin
 - 📈 **Performance Metrics**: Track delivery success rates and customer satisfaction
 - 🔄 **Interactive UI**: Smooth animations and responsive design
 - 🎯 **AI-Powered Planning**: Generate optimized supply chain plans
+- 📝 **Smart Supply Chain Form**: Intuitive form for generating comprehensive supply chain plans
 
 ## Tech Stack
 
@@ -22,6 +23,7 @@ A modern, AI-powered supply chain management dashboard built with React, Tailwin
 - Recharts
 - React Icons
 - React Toastify
+- Gemini API (for AI-powered predictions)
 
 ## Getting Started
 
@@ -61,6 +63,8 @@ SmartSupply/
 ├── public/             # Static assets
 ├── src/
 │   ├── components/     # Reusable components
+│   │   ├── DemandPrediction.jsx  # AI-powered demand prediction
+│   │   └── ...        # Other components
 │   ├── pages/         # Page components
 │   ├── assets/        # Images and other assets
 │   └── App.jsx        # Main application component
@@ -75,22 +79,39 @@ SmartSupply/
 - Interactive charts and graphs
 - Quick action buttons for common tasks
 
-### 2. Inventory Management
+### 2. Supply Chain Plan Generator
+- Step-by-step form for creating supply chain plans
+- Location and delivery details input
+- Product management with quantity and priority settings
+- Special requirements handling
+- Urgency level selection
+- AI-powered plan generation
+- Comprehensive cost analysis
+- Risk assessment integration
+
+### 3. Inventory Management
 - Product tracking
 - Stock level monitoring
 - Quality assurance checks
 
-### 3. Distribution Planning
+### 4. Distribution Planning
 - Route optimization
 - Vehicle management
 - Schedule planning
 - Weather considerations
 
-### 4. Risk Assessment
+### 5. Risk Assessment
 - Weather condition monitoring
 - Road condition tracking
 - Risk mitigation strategies
 - Backup planning
+
+### 6. Demand Prediction
+- AI-powered demand forecasting
+- Historical data analysis
+- Future trend predictions
+- Market analysis
+- Environmental factor consideration
 
 ## Contributing
 
@@ -108,10 +129,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- [React](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Recharts](https://recharts.org/)
+- Thanks to all contributors who have helped improve this project
+- Special thanks to the open-source community for their valuable tools and libraries
 
 ## Contact
 
